@@ -1,2 +1,5 @@
 # CloudVandana-Assesment
-Javascript code contain javascript assignment
+Javascript Assignment folder contain javascript assignment
+HTML, CSS, JavaScript Assignment folder contain html assignment
+Java Assignment folder contain Java assignment
+
