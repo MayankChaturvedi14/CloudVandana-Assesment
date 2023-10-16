@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Survey Form</title>
+    <style>
+        body {
+            background-color: #3498db;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #fff;
+            width: 80%;
+            max-width: 600px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-control {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            /* Two columns */
+            gap: 10px;
+            /* Gap between columns and rows */
+        }
+
+        .col-md-6 {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .col-md-3 {
+            width: calc(33.33% - 5px);
+            /* Create a 3-column grid with a small gap between columns */
+            margin-top: 10px;
+            /* Add margin to the top of the gender input elements */
+        }
+
+        .col-md-6 label {
+            margin-bottom: 5px;
+        }
+
+        .col-md-6 input[type="text"],
+        .col-md-6 input[type="date"],
+        .col-md-6 select,
+        .col-md-6 input[type="email"],
+        .col-md-6 input[type="tel"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .col-md-6 button {
+            width: auto;
+            padding: 10px 20px;
+            margin-top: 10px;
+        }
+
+        .form-buttons {
+            display: flex;
+            justify-content: space-between;
+            /* Make buttons appear inline and spaced apart */
+        }
+
+        .form-buttons button {
+            width: 48%;
+            /* Adjust button width as needed */
+            padding: 10px 20px;
+            box-shadow: 5px 5px 10px rgba(136, 136, 136, 0.3);
+            /* Add a box shadow */
+        }
+
+        /* Add styles for the modal and its components */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 800px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .gender-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .country-select-container {
+            display: flex;
+            align-items: center;
+        }
+
+        #submitButton:hover {
+            background-color: #07f70f;
+            /* Green color on hover */
+            font-size: 16px;
+            /* Change the font size */
+            font-weight: bold;
+            /* Make the text bold */
+            font-family: Arial, sans-serif;
+            /* Change the font family to Arial */
+        }
+
+        #resetButton:hover {
+            background-color: #ff0000;
+            /* Red color on hover */
+            font-size: 16px;
+            /* Change the font size */
+            font-weight: bold;
+            /* Make the text bold */
+            font-family: Arial, sans-serif;
+            /* Change the font family to Arial */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Survey Form</h2>
+        <form id="surveyForm" action="#" method="post">
+            <div class="form-control">
+                <div class="col-md-6">
+                    <label for="firstName">First Name:</label>
+                    <input type="text" id="firstName" name="firstName" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="lastName">Last Name:</label>
+                    <input type="text" id="lastName" name="lastName" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="dob">Date of Birth:</label>
+                    <input type="date" id="dob" name="dob" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="country">Country:</label>
+                    <div class="country-select-container">
+                        <select id="country" name="country" required>
+                            <option>Select Country</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="profession">Profession:</label>
+                    <input type="text" id="profession" name="profession" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required
+                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+                </div>
+                <div class="col-md-6">
+                    <label for="mobile">Mobile Number:</label>
+                    <input type="tel" id="mobile" name="mobile" required pattern="[789][0-9]{9}" maxlength="10">
+                </div>
+                <div class="col-md-6">
+                    <label for="gender">Gender:</label>
+                    <div class="gender-container">
+                        <div class="col-md-3">
+                            <label for="male" style="display: inline-block; margin-right: 10px;">Male</label>
+                            <input type="checkbox" id="male" name="gender" value="male"
+                                style="display: inline-block; margin-right: 10px;">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="female" style="display: inline-block; margin-right: 10px;">Female</label>
+                            <input type="checkbox" id="female" name="gender" value="female"
+                                style="display: inline-block;">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="other" style="display: inline-block; margin-right: 10px;">Other</label>
+                            <input type="checkbox" id="other" name="gender" value="other"
+                                style="display: inline-block;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-buttons">
+                <button type="submit" id="submitButton">Submit</button>
+                <button type="reset" id="resetButton">Reset</button>
+            </div>
+        </form>
+    </div>
+    <div class="modal" id="myModal">
+        <div class="modal-content">
+            <span class="close" id="closeButton">&times;</span>
+            <div id="modal-content">
+                <!-- Submitted values will be displayed here -->
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        const form = document.getElementById("surveyForm");
+        const submitButton = document.getElementById("submitButton");
+        const resetButton = document.getElementById("resetButton");
+        const popup = document.getElementById("popup");
+        const popupContent = document.getElementById("popup-content");
+        const maleCheckbox = document.getElementById("male");
+        const femaleCheckbox = document.getElementById("female");
+        const otherCheckbox = document.getElementById("other");
+        const countrySelect = document.getElementById("country");
+    
+        // Fetch the list of countries from the REST Countries API
+        fetch("https://restcountries.com/v2/all")
+            .then((response) => response.json())
+            .then((data) => {
+                data.forEach((country) => {
+                    // Create an option element for each country
+                    const option = document.createElement("option");
+                    option.value = country.name; // Use the full name of the country
+                    option.textContent = country.name;
+    
+                    // Append the option to the select element
+                    countrySelect.appendChild(option);
+                });
+            })
+            .catch((error) => {
+                console.error("Error fetching country data:", error);
+            });
+    
+        // Function to ensure only one checkbox can be selected at a time
+        function handleGenderSelection(event) {
+            if (event.target === maleCheckbox) {
+                femaleCheckbox.checked = false;
+                otherCheckbox.checked = false;
+            } else if (event.target === femaleCheckbox) {
+                maleCheckbox.checked = false;
+                otherCheckbox.checked = false;
+            } else if (event.target === otherCheckbox) {
+                maleCheckbox.checked = false;
+                femaleCheckbox.checked = false;
+            }
+        }
+    
+        // Add event listeners to the checkboxes
+        maleCheckbox.addEventListener("change", handleGenderSelection);
+        femaleCheckbox.addEventListener("change", handleGenderSelection);
+        otherCheckbox.addEventListener("change", handleGenderSelection);
+    
+        const modal = document.getElementById("myModal");
+        const closeButton = document.getElementById("closeButton");
+    
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+    
+            // Display submitted values in the modal
+            const firstName = document.getElementById("firstName").value;
+            const lastName = document.getElementById("lastName").value;
+            const dob = document.getElementById("dob").value;
+            const country = document.getElementById("country").value;
+            const genderElements = document.querySelectorAll('input[name="gender"]:checked');
+            const gender = Array.from(genderElements).map(el => el.value).join(", ");
+            const profession = document.getElementById("profession").value;
+            const email = document.getElementById("email").value;
+            const mobile = document.getElementById("mobile").value;
+    
+            const modalContent = document.getElementById("modal-content");
+            modalContent.innerHTML = `
+        <p><strong>First Name:</strong> ${firstName}</p>
+        <p><strong>Last Name:</strong> ${lastName}</p>
+        <p><strong>Date of Birth:</strong> ${dob}</p>
+        <p><strong>Country:</strong> ${country}</p>
+        <p><strong>Gender:</strong> ${gender}</p>
+        <p><strong>Profession:</strong> ${profession}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Mobile Number:</strong> ${mobile}</p>
+    `;
+    
+            // Display the modal
+            modal.style.display = "block";
+        });
+    
+        closeButton.addEventListener("click", function () {
+            // Close the modal and reset the form
+            modal.style.display = "none";
+            form.reset();
+        });
+    
+        // Close the modal if the user clicks outside the modal content
+        window.addEventListener("click", function (event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+                form.reset();
+            }
+        });
+    </script>
+    
+
+
+</body>
+
+</html>

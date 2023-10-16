@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Calculator</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Roboto');
+
+    body {
+      background: #BDBDBD;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    #calcContainer {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #ffffff;
+      width: 80%;
+      height: auto;
+      box-shadow: 0.5em 0.5em 1.2em rgba(0, 0, 0, 0.2);
+    }
+
+    .result-clear {
+      display: flex;
+      margin: 0;
+      padding: 0;
+    }
+
+    .result-clear input[type="text"].result {
+      display: block;
+      border: 0;
+      padding-top: 1%;
+      padding-left: 5%;
+      width: 72%;
+      height: 60px;
+      font-size: 1.4em;
+    }
+
+    .grid-buttons {
+      margin: 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      background: #212121;
+    }
+
+    input[type="button"] {
+      flex-grow: 1;
+      width: 25%;
+      height: auto;
+      padding: 4%;
+      border: 0;
+      align-items: center;
+      text-align: center;
+      font-size: 1.2em;
+      font-weight: 500;
+      color: #ffffff;
+      background: #212121;
+      border: 2px solid #212121;
+    }
+
+    input[type="button"]:focus {
+      outline: 0;
+    }
+
+    input[type="button"].clear {
+      width: 20%;
+      font-size: 20px;
+      background: #009688;
+      border: 2px solid #009688;
+    }
+
+    .grid-buttons input[type="button"].math {
+      background: #757575;
+      border: 2px solid #757575;
+    }
+
+    .grid-buttons input[type="button"]:hover,
+    input[type="button"].clear:hover {
+      background: #00BCD4;
+      border: 2px solid #00BCD4;
+      transition: 0.3s ease;
+    }
+  </style>
+</head>
+<body>
+<div id="calcContainer">
+  <form name="calculator">
+    <div class="result-clear">
+      <input type="text" class="result" name="answer" readonly />
+      <input type="button" class="clear" value=" AC " onclick="clearDisplay()" />
+      <input type="button" class="clear" value="⌫" onclick="backspace()" />
+    </div>
+    <div class="grid-buttons">
+      <input type="button" value="9" onclick="appendCharacter('9')" />
+      <input type="button" value="8" onclick="appendCharacter('8')" />
+      <input type="button" value="7" onclick="appendCharacter('7')" />
+      <input type="button" value="+" onclick="appendCharacter('+' )" class="math" />
+      <br />
+      <input type="button" value="4" onclick="appendCharacter('4')" />
+      <input type="button" value="5" onclick="appendCharacter('5')" />
+      <input type="button" value="6" onclick="appendCharacter('6')" />
+      <input type="button" value="−" onclick="appendCharacter('-')" class="math" />
+      <br />
+      <input type="button" value="1" onclick="appendCharacter('1')" />
+      <input type="button" value="2" onclick="appendCharacter('2')" />
+      <input type="button" value="3" onclick="appendCharacter('3')" />
+      <input type="button" value="÷" onclick="appendCharacter('/')" class="math" />
+      <br />
+      <input type="button" value="." onclick="appendCharacter('.')" />
+      <input type="button" value="0" onclick="appendCharacter('0')" />
+      <input type="button" value="=" onclick="calculateResult()" />
+      <input type="button" value="×" onclick="appendCharacter('*')" class="math" />
+    </div>
+  </form>
+</div>
+<script>
+  function appendCharacter(character) {
+    calculator.answer.value += character;
+  }
+
+  function clearDisplay() {
+    calculator.answer.value = '';
+  }
+
+  function backspace() {
+    const currentDisplay = calculator.answer.value;
+    if (currentDisplay.length > 0) {
+      calculator.answer.value = currentDisplay.slice(0, -1);
+    }
+  }
+
+  function calculateResult() {
+    calculator.answer.value = eval(calculator.answer.value);
+  }
+</script>
+</body>
+</html>
